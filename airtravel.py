@@ -12,7 +12,7 @@ class Flight:
         self._number=number
         self._aircraft=aircraft
         rows, seats = self._aircraft.seating_plan()
-        self._seating = [None] + [{letter: None for letter in seats} for _ in rows]
+        self._seating = [{letter: None for letter in seats} for _ in rows]
 
     def number(self):
         return self._number
@@ -23,7 +23,7 @@ class Flight:
     def aircraft_model(self):
         return self._aircraft.model()
 
-    def allocate_seat(self,seat,passenger):
+    def allocate_seat(self, seat, passenger):
         """Allocate seat to a passenger.
 
         Args:
@@ -43,7 +43,7 @@ class Flight:
 
         row_text = seat[:-1]
         try:
-            row = int(row_text)
+            row = int(row_text) - 1
         except ValueError:
             raise ValueError("Invalid seat row {}".format(row_text))
 
@@ -72,3 +72,6 @@ class Aircraft:
     def seating_plan(self):
         return (range(1, self._num_rows + 1), "ABCDEFGHJK"[:self._num_seats_per_row])
 
+def make_flight():
+    f = Flight('BA758', Aircraft('G-EUPT', 'Airbus A319', num_rows=22, num_seats_per_row=6))
+    return f

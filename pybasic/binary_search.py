@@ -1,26 +1,31 @@
 import DataStructures.Sorting.mergesort_start as merge
 
-def search(element, dataset, lower, upper):
+def binary_search(element, dataset, lower, upper):
     if upper >= lower:
         mid = (lower + upper) // 2
 
         if dataset[mid] == element:
-            return True
+            return mid
 
         elif dataset[mid] > element:
-            return search(element, dataset, lower, mid - 1)
+            return binary_search(element, dataset, lower, mid - 1)
         else:
-            return search(element, dataset, mid + 1, upper)
+            return binary_search(element, dataset, mid + 1, upper)
 
     else:
-        return False
+        return -1
+
+def search(elem, elements):
+    return binary_search(elem, elements, 0, len(elements)-1)
 
 if __name__ == '__main__':
-    datavalues = [1, 3, 71, 4, 20, 12, 18]
+    datavalues = [1, 3, 20, 71, 4,1, 20, 3, 12, 18]
+    ranked = [100, 90, 90, 80, 75, 60]
     merge.mergesort(datavalues)
-    #print(datavalues)
+    ranked.reverse()
 
-    if search(21, datavalues, 0, len(datavalues) - 1):
-        print('Found ..')
-    else:
-        print('Not Found ..')
+    print(search(100, ranked))
+    #if search(100, datavalues):
+     #   print('Found ..')
+    #else:
+     #   print('Not Found ..')
