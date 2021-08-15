@@ -86,6 +86,3 @@ if __name__ == '__main__':
     s.add(-189)
     print(s)  # Will print the sorted int list
     s.add('num')  # Will raise TypeError
-
-
-
