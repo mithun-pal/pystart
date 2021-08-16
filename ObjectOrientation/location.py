@@ -1,5 +1,5 @@
 import inspect
-from position import *
+from position import EarthPosition, typename
 
 
 def auto_repr(cls):
@@ -60,6 +60,14 @@ class Location:
 
     def __str__(self):
         return self.name
+
+    def __eq__(self, other):
+        if not isinstance(other, type(self)):
+            return NotImplemented
+        return (self.name == other.name) and (self.position == other.position)
+
+    def __hash__(self):
+        return hash((self.name, self.position))
 
 
 oslo = Location("Oslo", EarthPosition(59.91, 10.75))
